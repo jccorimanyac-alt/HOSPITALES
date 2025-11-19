@@ -30,3 +30,15 @@ print(df[categorical_vars].describe())
 # Para variables numéricas
 numerical_vars = ['edad', 'N_días_hosp', 'Talla_paciente', 'Peso_paciente']
 print(df[numerical_vars].describe())
+
+
+
+# Total de valores nulos por columna
+nulls = df.isnull().sum()
+nulls = nulls[nulls > 0].sort_values(ascending=False)
+print("Valores nulos por variable:")
+print(nulls)
+
+# Le imputamos la moda
+df['sat8'].fillna(df['sat8'].mode()[0], inplace=True)
+
