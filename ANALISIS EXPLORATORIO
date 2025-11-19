@@ -3,3 +3,30 @@ import seaborn as sns
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 
+#df = pd.read_csv('/content/data sa.csv',')
+df = pd.read_csv("data.csv", encoding='latin1',sep=';')
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+print(df.shape)
+print(df.head())
+print(df.info())
+
+# Variables categóricas
+categorical_vars = [
+    'sexo', 'rango_edad', 'hospital', 'sat_general',
+    'sat1', 'sat2', 'sat3', 'sat4', 'sat5', 'sat6', 'sat7', 'sat8',
+    'medicion', 'Procedencia', 'Tipo_hospitalización', 'Nivel_riesgoQ'
+]
+
+
+for col in categorical_vars:
+    df[col] = df[col].astype('category')
+
+
+print(df[categorical_vars].describe())
+
+# Para variables numéricas
+numerical_vars = ['edad', 'N_días_hosp', 'Talla_paciente', 'Peso_paciente']
+print(df[numerical_vars].describe())
